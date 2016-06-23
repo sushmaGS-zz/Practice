@@ -1,3 +1,3 @@
 # Practice
 
-Here I save programs whatever I worked in Hackerrank contests.
+Here I save problems that I solve in Hackerrank contests.
