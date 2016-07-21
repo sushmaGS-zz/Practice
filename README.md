@@ -1,3 +1,3 @@
 # Practice
 
-Here I save problems that I solve in Hackerrank contests.
+Interesting problems that I solve in leisure time on geeksforgeeks/Hackerrank 
