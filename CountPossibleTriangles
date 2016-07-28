@@ -1,0 +1,49 @@
+/*Given an unsorted array of positive integers. Find the number of triangles that can be formed with three different array elements as lengths of three sides of triangles. 
+*/
+
+//first attempt: Brute force with very high time complexity.
+
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) {
+		
+	Scanner in = new Scanner(System.in);
+	int T = in.nextInt();
+	int N;
+	int[] arr;
+	
+	int a,b,c,d,e;
+	int i,j,k,count;
+    
+    
+    for(d=0;d<T; d++){
+    N = in.nextInt(); 
+    arr= new int[N];
+    count =0;
+    
+    for(e =0; e < N; e++){
+		    arr[e]= in.nextInt();
+		}
+		
+		for(i=0; i<N-2;i++){
+		    a = arr[i];
+		    for(j=i+1; j<N-1; j++){
+		        b = arr[j];
+		        for(k = j+1; k<N;k++){
+		        c= arr[k];
+		        if((a+b>c) && (a+c>b) && (b+c>a)){
+		            count++;
+		            System.out.println(a+","+b+","+c+" can form a triangle");
+		        }
+		    }
+		    }
+		}
+		System.out.println(count);
+    }
+	    
+	}
+}
