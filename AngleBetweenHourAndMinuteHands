@@ -5,6 +5,7 @@ import java.io.*;
 
 public class Test{
    public static void main(String args[]){
+   
       String str = new String("13:30");
       String[] strArray = str.split("[:]");
       int[] intArray = new int[strArray.length];
@@ -12,17 +13,11 @@ public class Test{
       for(int i =0; i < strArray.length; i++)
       {
           intArray[i]=Integer.parseInt(strArray[i]);
-          
       }   
-      
           int Hour = intArray[0];
           int Min = intArray[1];
           double HourAngle = (Hour%12)*30 + Min*0.5;
           double MinAngle = Min*6;
           System.out.println(Math.abs(HourAngle-MinAngle));
-      
-      
-      
-      
    }
 }
