@@ -1,0 +1,44 @@
+/*
+Suppose we could access yesterday's stock prices as a list, where:
+
+The indices are the time in minutes past trade opening time, which was 9:30am local time.
+The values are the price in dollars of Apple stock at that time.
+So if the stock cost $500 at 10:30am, stock_prices_yesterday[60] = 500.
+
+Write an efficient function that takes stock_prices_yesterday and returns the best profit I could have made from 1 purchase and 1 sale of 1 Apple stock yesterday.
+*/
+
+
+import java.io.*;
+
+public class AppleStocksMaxProfit {
+
+	public static void main(String[] args) {
+
+		int[] prices = { 1000, -5 , 800, 200, 100, 50, 10, 5, 500, 5000 };
+		int minPrice = prices[0];
+		int maxProfit = prices[1] - prices[0];
+		//check if less than 2 values exist in the list in which case we can't calculate profit
+		try{
+			if(prices.length < 2){
+				System.out.println("cant get profit from less than 2 values");
+			}
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("please enter at least 2 values to calculate profit");
+		}
+		//calculate profit first and then calculate min price so that if the list has continuosly decreasing values, it will not turn 0 as //profit and give -ve profit which is accurate for the problem.
+		for (int i = 1; i < prices.length; i++) {
+			
+				int temp = prices[i] - minPrice;
+				if (temp > maxProfit) {
+					maxProfit = Math.max(maxProfit, temp);
+				}	
+				minPrice = Math.min(prices[i], minPrice);
+
+		}
+		System.out.println(maxProfit + " " + minPrice);
+
+	}
+
+}
