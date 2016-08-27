@@ -1,0 +1,142 @@
+/*
+ * binary tree Implementation and some of the general problems asked in interviews like 
+ #finding sum of all leaf nodes for a particular Node passed in the function
+ #
+ * 
+ */
+
+class Node {
+	int data;
+	Node left, right;
+
+	Node(int item) {
+		data = item;
+		left = right = null;
+	}
+}
+
+public class Test6 {
+	// root of binary tree
+	static Node root;
+
+	// constructors
+	Test6(int data) {
+		root = new Node(data);
+	}
+
+	Test6() {
+		root = null;
+	}
+
+	// IN-ORDER: left-root-right
+	private static void inOrder(Node root) {
+
+		if (root == null)
+			return;
+		inOrder(root.left);
+		System.out.println(root.data);
+		inOrder(root.right);
+	}
+
+	// PRE-ORDER: root-left-right
+	private static void preOrder(Node root) {
+
+		if (root == null)
+			return;
+		System.out.println(root.data);
+		preOrder(root.left);
+		preOrder(root.right);
+	}
+
+	// POST-ORDER: left-right-root
+	private static void postOrder(Node root) {
+		if (root == null)
+			return;
+		postOrder(root.left);
+		postOrder(root.right);
+		System.out.println(root.data);
+	}
+
+	private static void insertNode(Node n) {
+		Node curr = root;
+		while (curr != null) {
+			if (n.data < curr.data) {
+				curr = n.left;
+			} else {
+				curr = n.right;
+			}
+		}
+		if (curr.left != null)
+			curr.left.data = n.data;
+		else {
+			curr.right.data = n.data;
+		}
+	}
+
+	// insert new node and return root
+	public static Node insertNewNodeReturnRoot(Node root, int value) {
+		Node n = new Node(value);
+
+		if (root == null) {
+			return n;
+		}
+		Node temp = root;
+		while (temp != null) {
+			if (value < temp.data) {
+				if (temp.left == null) {
+					temp.left = n;
+					break;
+				}
+				temp = temp.left;
+			} else {
+				if (temp.right == null) {
+					temp.right = n;
+					break;
+				}
+				temp = temp.right;
+			}
+		}
+		System.out.println(root.data);
+		return root;
+
+	}
+
+	// Finding sum of all leaf nodes and the 
+	//pass any node for which you want sum of itself and all of its children
+
+	public static int sumLeafNodes(Node root) {
+		if (root == null)
+			return 0;		
+		//to know what exactly is getting returned at each iteration of recursive function sumLeafNodes, just print the return statement. 
+		//System.out.println(root.data +" "+ sumLeafNodes(root.left) +" "+ sumLeafNodes(root.right));
+		return root.data + sumLeafNodes(root.left) + sumLeafNodes(root.right);		
+	}
+
+	// main method
+	public static void main(String[] args) {
+		Test6 tree = new Test6();
+		// creating root
+		tree.root = new Node(10);
+		tree.root.left = new Node(8);
+		tree.root.left.left = new Node(5);
+		tree.root.left.right = new Node(9);
+		tree.root.left.left.left = new Node(4);
+		tree.root.left.left.right = new Node(6);
+		
+		tree.root.right = new Node(14);
+		tree.root.right.left = new Node(12);
+		tree.root.right.right = new Node(15);
+		tree.root.right.left.left = new Node(11);
+		tree.root.right.left.right = new Node(13);
+		tree.root.right.right.right = new Node(16);
+		int s = sumLeafNodes(root); //pass any node for which you want sum of itself and all of its children 
+		System.out.println(s);
+		// inOrder(tree.root);
+		// preOrder(tree.root);
+		// postOrder(tree.root);
+		// insertNewNodeReturnRoot(root, 50);
+		// inOrder(tree.root);
+		
+	}
+
+}
