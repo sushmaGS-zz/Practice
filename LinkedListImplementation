@@ -1,0 +1,155 @@
+/*
+ * Linked List implementation and some interesting problems
+ * insertion
+ * deletion
+ * printing elements
+ * removing duplicates
+ * sorting...yet to be done
+ */
+
+import java.util.*;
+
+public class Test5 {
+
+	static Node head;
+
+	// inner class to define a Node
+	static class Node {
+		int data;
+		Node next;
+
+		// Node class constructor for initialization purpose
+		Node(int d) {
+			data = d;
+			next = null;
+		}
+	}
+
+	// to print the data in the list
+	public void printList() {
+		Node n = head;
+		while (n != null) {
+			System.out.print(n.data + "-->");
+			n = n.next;
+		}
+	}
+
+	// inserting new node at the front of the linked list
+	private static void insertBegin(int new_data) {
+		Node new_node = new Node(new_data);
+		new_node.next = head;
+		head = new_node;
+	}
+
+	// insert new node after a particular node
+	private static void insertAfter(Node prev_node, int new_data) {
+		if (prev_node == null) {
+			System.out.println("Error: prev node can't be null");
+		}
+		Node new_node = new Node(new_data);
+		new_node.next = prev_node.next;
+		prev_node.next = new_node;
+	}
+
+	// insert new node at the end of the list
+	private static void insertEnd(int new_data) {
+		Node new_node = new Node(new_data);
+		if (head == null) {
+			head = new_node;
+			return;
+		}
+		new_node.next = null;
+		Node last = head;
+		while (last.next != null) {
+			last = last.next;
+		}
+		last.next = new_node;
+		return;
+	}
+
+	// deletion from the end
+	private static void deleteEnd() {
+		if (head != null) {
+			Node last = head;
+			while (last.next != null) {
+				last = last.next;
+			}
+			last.next = null;
+		}
+	}
+
+	// deletion after an element
+	private static void deleteAfter(Node prev) {
+	}
+
+	// deletion from starting of the list
+	private static void deleteBegin() {
+		if (head != null) {
+			head.next = head;
+			head = null;
+		}
+		return;
+	}
+
+	// remove duplicates from the list using buffer Hashset
+	public static void removeDupsBuffer(Node head) {
+
+		HashSet<Integer> set = new HashSet<Integer>();
+		Node temp = null;
+
+		while (head != null) {
+			if (set.contains(head.data)) {
+				temp.next = head.next;
+			} else {
+				set.add(head.data);
+				temp = head;
+			}
+			head = head.next;
+		}
+
+	}
+
+	// remove duplicates from the list without using buffer
+
+	public static void removeDups(Node current) {
+		
+		while (current != null) {
+			Node temp = current;
+			while (temp.next != null) {
+				if (temp.next.data == current.data)
+					temp.next = temp.next.next;
+				else
+					temp = temp.next;
+			}
+			current = current.next;
+		}
+	}
+
+	public static void main(String[] args) {
+		Test5 obj = new Test5();
+		insertBegin(10);
+		insertBegin(12);
+		insertBegin(40);
+		insertBegin(16);
+		insertBegin(12);
+		insertAfter(head.next, 50);
+		insertAfter(head.next, 20);
+		insertAfter(head.next, 10);
+		insertEnd(60);
+		insertEnd(40);
+		insertEnd(20);
+		obj.printList();
+		// removeDups(head);
+
+		removeDupsBuffer(head);
+		System.out.println();
+		obj.printList();
+		// deleteBegin();
+		// deleteAfter(head.next);
+		// deleteEnd();
+		
+		
+
+	}
+
+}
